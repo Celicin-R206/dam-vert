@@ -1,0 +1,81 @@
+/** @format */
+
+.login {
+  background: url("/assets/images/bg.jpg") no-repeat;
+  background-position: center;
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.login .logo {
+  margin-top: 4rem;
+}
+
+.login form {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  padding: 1rem;
+  gap: 1.5rem;
+  border-radius: 10px;
+  border: 2px solid #ddd;
+}
+
+.login form span {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.login form span label {
+  font-size: 15px;
+}
+
+.login form span input {
+  background: var(--color_bg);
+  width: 280px;
+  padding: 0.2rem;
+  border-radius: 5px;
+  border: 2px solid #ddd;
+  outline-color: var(--primary);
+}
+
+.login form span.password div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.login form span button {
+  background: var(--primary);
+  color: #fff;
+  padding: 0.3rem;
+  border-radius: 5px;
+}
+
+.bottom_login {
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  width: 100%;
+  text-align: center;
+  padding: 1rem 0rem;
+}
+
+.bottom_login p:first-child {
+  color: var(--primary);
+  font-weight: 500;
+}
+
+/* ---- content login ---- */
+
+.content_login h1 {
+  font-weight: 700;
+}
+
+.login .error {
+  color: red;
+  font-size: 13px;
+}

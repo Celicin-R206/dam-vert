@@ -1,33 +1,28 @@
 "use client";
 
 import React from "react";
-import { EnvelopeIcon, PhoneIcon } from "@heroicons/react/24/solid";
-import { FacebookIcon, InstagramIcon, TwitterIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { CreditCard, User } from "lucide-react";
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Navbar = () => {
   const pathName = usePathname();
   return (
     <div>
-      <div className="flex py-3 items-center justify-between">
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-1">
-            <PhoneIcon className="w-[1rem]" /> +261342304165
-          </div>
-          <div className="flex items-center gap-1">
-            <EnvelopeIcon className="w-[1rem]" /> rahandrimiray@gmail.com
-          </div>
-        </div>
-        <div className="flex items-center gap-3">
-          <FacebookIcon className="w-[1rem]" />
-          <InstagramIcon className="w-[1rem]" />
-          <TwitterIcon className="w-[1rem]" />
-        </div>
-      </div>
       <div className="flex justify-between items-center mt-2 bg-white py-5 px-8 rounded-full">
         <div>
           <Image
@@ -58,9 +53,33 @@ const Navbar = () => {
           </ul>
         </div>
         <div>
-          <Button className="bg-secondary py-5 rounded-full uppercase text-black ">
-            Commencer
-          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button className="bg-secondary py-5 rounded-full uppercase text-black ">
+                Commencer
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-56">
+              <DropdownMenuLabel>Cité dam vert</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuGroup>
+                <DropdownMenuItem>
+                  <User className="mr-2 h-4 w-4" />
+                  <Link href={"/login"}>
+                    <span>Se connecter</span>
+                  </Link>
+                  <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <CreditCard className="mr-2 h-4 w-4" />
+                  <Link href={"/register"}>
+                    <span>Inscription</span>
+                  </Link>
+                  <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
     </div>

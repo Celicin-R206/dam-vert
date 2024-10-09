@@ -11,6 +11,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import Header from "../_components/header";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function HomeLayout({
   children,
@@ -48,6 +49,10 @@ export default function HomeLayout({
     },
   ];
 
+  const pathname = usePathname();
+
+  const router = useRouter();
+
   const [open, setOpen] = useState(false);
 
   return (
@@ -57,13 +62,22 @@ export default function HomeLayout({
           "rounded-md flex flex-col md:flex-row bg-gray-100 dark:bg-neutral-800 w-full flex-1  border border-neutral-200 dark:border-neutral-700 overflow-hidden",
           "h-screen"
         )}>
-        <Sidebar open={open} setOpen={setOpen}>
+        <Sidebar open={open} setOpen={setOpen} animate={false}>
           <SidebarBody className="justify-between gap-10">
             <div className="flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
               {open ? <Logo /> : <LogoIcon />}
               <div className="mt-8 flex flex-col gap-2">
                 {links.map((link, idx) => (
-                  <SidebarLink key={idx} link={link} />
+                  <div
+                    onClick={() => router.push(link.href)}
+                    className={cn(
+                      "flex items-center gap-2 p-2 rounded-md transition-colors",
+                      pathname === link.href
+                        ? "bg-gray-300 dark:bg-neutral-700"
+                        : "hover:bg-gray-200 dark:hover:bg-neutral-600"
+                    )}>
+                    <SidebarLink key={idx} link={link} />
+                  </div>
                 ))}
               </div>
             </div>

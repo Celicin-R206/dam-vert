@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import Navbar from "../_components/navbar";
 import {
   MapContainer,
   TileLayer,
@@ -13,7 +12,8 @@ import "leaflet/dist/leaflet.css";
 // @ts-ignore
 import L from "leaflet";
 import "leaflet-control-geocoder";
-import LeafletGeocoder from "../_components/map/Geocoder";
+import LeafletGeocoder from "@/app/(frontoffice)/_components/map/Geocoder";
+import { useCoordonnerStore } from "@/app/utils/stores/eventStore";
 
 // Configuration de l'icône de Leaflet
 delete L.Icon.Default.prototype._getIconUrl;
@@ -24,29 +24,21 @@ L.Icon.Default.mergeOptions({
   shadowUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png",
 });
 
-const Page = () => {
-  return (
-    <div>
-      <div className="w-[1150px] m-auto">
-        <Navbar />
-        <Map />
-      </div>
-    </div>
-  );
-};
-
-export default Page;
-
-const Map = () => {
+export const Map = () => {
   const position = [-21.456466663981892, 47.08601081382767];
   const [position_click, setPosition_click] = useState(null);
+  const setCoordonner = useCoordonnerStore((state) => state.setCoordonner);
 
   const LocationMarker = () => {
     useMapEvents({
       // @ts-ignore
       click(e) {
-        setPosition_click(e.latlng); // Met à jour la position du clic
-        console.log("Coordonnées cliquées:", e.latlng); // Affiche dans la console
+        setPosition_click(e.latlng);
+        console.log("Coordonnées cliquées:", e.latlng);
+        setCoordonner({
+          lat: e.latlng.lat,
+          lng: e.latlng.lng,
+        });
       },
     });
 

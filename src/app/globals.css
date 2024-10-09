@@ -10,7 +10,7 @@
     --card-foreground: 0 0% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 3.9%;
-    --primary: #16a34a;
+    --primary: #1c5e34;
     --primary-foreground: 0 0% 98%;
     --secondary: #feda48;
     --secondary-foreground: 0 0% 9%;
@@ -69,3 +69,13 @@
 }
 
 /* ----------- ANIMATION ------------- */
+
+.leaflet-control-geocoder .leaflet-bar .leaflet-control {
+  background: white;
+}
+
+.leaflet-control-geocoder-form input {
+  border-radius: 4px;
+  padding: 10px;
+  width: 300px;
+}

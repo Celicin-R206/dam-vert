@@ -1,0 +1,102 @@
+/** @format */
+
+.register {
+  background: url("/assets/images/bg.jpg") no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  padding: 2rem 0rem;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.register .logo {
+  margin-top: 2rem;
+}
+
+.register form {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  width: 38.4rem;
+  padding: 1rem;
+  gap: 1rem;
+  border-radius: 10px;
+  border: 2px solid #ddd;
+}
+
+.register form .form-groupe {
+  display: flex;
+  gap: 1rem;
+}
+
+.register form span {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.register form span label {
+  font-size: 15px;
+}
+
+.register form span .cin_copie select {
+  border: 2px solid #ddd;
+  width: 70px;
+}
+
+.register form span input {
+  width: 100%;
+  padding: 0.2rem;
+  border-radius: 5px;
+  border: 2px solid #ddd;
+  outline-color: var(--primary);
+}
+
+.register form span.password div {
+  display: flex;
+  justify-content: space-between;
+}
+.register form span.password div label:last-child {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+.register form span button {
+  background: var(--primary);
+  color: #fff;
+  padding: 0.3rem;
+  border-radius: 5px;
+}
+
+.register form span button.pickdate-btn {
+  padding: 0.2rem;
+  height: 2.15rem;
+  border-radius: 5px;
+  border: 2px solid #ddd;
+  outline-color: var(--primary);
+  color: #000;
+}
+
+.bottom_register {
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  width: 100%;
+  text-align: center;
+  padding: 1rem 0rem;
+}
+
+.bottom_register p:first-child {
+  color: var(--primary);
+  font-weight: 500;
+}
+
+/* ---- content register ---- */
+
+.content_register h1 {
+  font-weight: 700;
+}
