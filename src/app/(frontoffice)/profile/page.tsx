@@ -11,6 +11,7 @@ import {
   Package2Icon,
 } from "lucide-react";
 import Navbar from "../_components/navbar";
+import Formation from "./formation/formation";
 
 const Page = () => {
   const [activeTab, setActiveTab] = useState("account");
@@ -22,8 +23,8 @@ const Page = () => {
       case "demande":
         return <p></p>;
 
-      case "rendezvous":
-        return <p></p>;
+      case "formation":
+        return <Formation />;
 
       case "subscription":
         return <p></p>;
@@ -52,7 +53,7 @@ const Page = () => {
             <div className="w-[7rem] h-[7rem]  relative">
               <Image
                 className="w-full h-full border-[7px] border-white object-cover rounded-full"
-                src={"/assets/images/testmonial-.jpeg"}
+                src={"/assets/images/fakeFace.jpeg"}
                 width={500}
                 height={500}
                 alt="profile"
@@ -106,16 +107,16 @@ const Page = () => {
                       : "bg-white"
                   }`}
                   onClick={() => setActiveTab("demande")}>
-                  <InboxIcon className="w-[1.2rem]" /> Demande
+                  <InboxIcon className="w-[1.2rem]" /> Evenement(s)
                 </li>
                 <li
                   className={`py-2 px-4 flex items-center gap-1 rounded-sm cursor-pointer ${
-                    activeTab === "rendezvous"
+                    activeTab === "formation"
                       ? "bg-secondary text-white"
                       : "bg-white"
                   }`}
-                  onClick={() => setActiveTab("rendezvous")}>
-                  <CalendarDaysIcon className="w-[1.2rem]" /> Rendez-vous
+                  onClick={() => setActiveTab("formation")}>
+                  <CalendarDaysIcon className="w-[1.2rem]" /> Formation(s)
                 </li>
                 <li
                   className={`py-2 px-4 flex items-center gap-1 rounded-sm cursor-pointer ${
@@ -125,7 +126,17 @@ const Page = () => {
                   }`}
                   onClick={() => setActiveTab("subscription")}>
                   <Package2Icon className="w-[1.2rem]" />
-                  Abonnements
+                  Menstriations
+                </li>
+                <li
+                  className={`py-2 px-4 flex items-center gap-1 rounded-sm cursor-pointer ${
+                    activeTab === "product"
+                      ? "bg-secondary text-white"
+                      : "bg-white"
+                  }`}
+                  onClick={() => setActiveTab("product")}>
+                  <Package2Icon className="w-[1.2rem]" />
+                  Mes Produits
                 </li>
               </ul>
             </div>

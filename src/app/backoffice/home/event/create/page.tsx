@@ -30,12 +30,14 @@ import { useCoordonnerStore } from "@/app/utils/stores/eventStore";
 import { Map } from "@/app/backoffice/_components/map/page";
 import { Calendar } from "@/components/ui/calendar";
 import Link from "next/link";
+import { Loader2Icon } from "lucide-react";
 import {
   Dialog,
   DialogContent,
   DialogFooter,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { useRouter } from "next/navigation";
 
 const eventSchema = z.object({
   nom: z.string().nonempty("Le titre de l'evenement est requis."),
@@ -59,8 +61,15 @@ const Page = () => {
   });
 
   const { coordonner } = useCoordonnerStore();
+  const router = useRouter();
 
   const { user, loadUser } = useUserStore();
+  useEffect(() => {
+    if (!user) {
+      loadUser();
+    }
+  }, [user, loadUser]);
+
   const [date1, setDate1] = React.useState<Date>();
   const [date2, setDate2] = React.useState<Date>();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -98,6 +107,7 @@ const Page = () => {
           });
           reset();
           setSelectedImage("");
+          router.push("/backoffice/home/event");
         })
         .catch((err) => {
           setIsoloading(false);
@@ -107,12 +117,6 @@ const Page = () => {
         });
     }
   };
-
-  useEffect(() => {
-    if (!user) {
-      loadUser();
-    }
-  }, [user, loadUser]);
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -325,9 +329,17 @@ const Page = () => {
           </span>
         </span>
         <span>
-          <button className="bg-[#5A48B4] p-3 rounded-xl w-full text-white ">
-            Ajouter
-          </button>
+          {!isLoading ? (
+            <button className="bg-[#5A48B4] p-3 rounded-xl w-full text-white ">
+              Ajouter
+            </button>
+          ) : (
+            <button
+              className="flex items-center justify-center opacity-50 bg-[#5A48B4] p-3 rounded-xl w-full text-white "
+              disabled>
+              <Loader2Icon className="animate-spin h-4 w-4" /> patientez
+            </button>
+          )}
         </span>
       </form>
 

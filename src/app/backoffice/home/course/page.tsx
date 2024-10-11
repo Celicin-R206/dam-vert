@@ -1,9 +1,33 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Calendar } from "@/components/ui/calendar";
 import { PlusIcon } from "lucide-react";
-import AvatarCircles from "@/components/ui/avatar-circles";
+import Link from "next/link";
+import { postSession, useMyCourse } from "@/app/utils/hooks/course";
+import { useUserStore } from "@/app/utils/stores/cookie";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "./accordion";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import toast from "react-hot-toast";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { FormationType } from "@/app/utils/types/api";
+import { Loader2Icon } from "lucide-react";
 
 const avatarUrls = [
   "https://avatars.githubusercontent.com/u/16860528",
@@ -23,10 +47,12 @@ const Page = () => {
             <h1 className="text-[2rem] font-[800] text-[#5A48B4] ">
               📒 Formation
             </h1>
-            <button className="flex items-center gap-2 bg-[#5A48B4] p-4 rounded-xl text-white font-[700] ">
-              {" "}
-              <PlusIcon /> Ajouter une formation
-            </button>
+            <Link href={"/backoffice/home/course/create"}>
+              <button className="flex items-center gap-2 bg-[#5A48B4] p-4 rounded-xl text-white font-[700] ">
+                {" "}
+                <PlusIcon /> Ajouter une formation
+              </button>
+            </Link>
           </div>
           <div className="mt-5">
             <ul className="flex items-center gap-8 text-[14px] font-[700] text-[#878787] ">
@@ -62,7 +88,7 @@ const Page = () => {
               </li>
             </ul>
           </div>
-          <div className="mt-[2rem]">{active == "all" && <AllEvent />}</div>
+          <div className="mt-[2rem]">{active == "all" && <AllCourse />}</div>
         </div>
       </div>
     </div>
@@ -71,46 +97,168 @@ const Page = () => {
 
 export default Page;
 
-const AllEvent = () => {
+const sessionSchema = z.object({
+  titre: z.string().nonempty("Le titre du session est requis."),
+  description: z
+    .string()
+    .min(10, "La description doit contenir au moins 10 caractères."),
+});
+
+type SessionForm = z.infer<typeof sessionSchema>;
+
+const AllCourse = () => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<SessionForm>({
+    resolver: zodResolver(sessionSchema),
+  });
+
+  const [files, setFiles] = useState<any>();
+  const [isLoading, setIsoloading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [idFormation, setIdFormation] = useState<number>();
+
+  const handleOpen = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const { user, loadUser } = useUserStore();
+  useEffect(() => {
+    if (!user) {
+      loadUser();
+    }
+  }, [user, loadUser]);
+
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    setFiles(files);
+  };
+
+  const { myCourse } = useMyCourse(user?.access ?? "");
+
+  console.log(myCourse);
+
+  const onSubmit = async (data: SessionForm) => {
+    if (data && idFormation) {
+      const formData = new FormData();
+      formData.append("titre", data.titre);
+      formData.append("description", data.description);
+      formData.append("formation", String(idFormation));
+
+      if (files) {
+        for (let i = 0; i < files.length; i++) {
+          formData.append("files", files[i]);
+        }
+      }
+
+      setIsoloading(true);
+      await postSession(formData, user?.access ?? "")
+        .then(() => {
+          setIsoloading(false);
+          toast.success("Votre formation a été publiée avec succès !", {
+            duration: 6000,
+          });
+          handleOpen();
+        })
+        .catch((err) => {
+          setIsoloading(false);
+          toast.error(`${err?.response?.data?.error}`, {
+            duration: 6000,
+          });
+        });
+    }
+  };
+
   const [date, setDate] = React.useState<Date | undefined>(new Date());
   return (
     <div className="flex gap-8">
-      <div className="flex flex-col gap-6">
-        {[1, 2, 3, 4]?.map((value, index) => {
-          return (
-            <div
-              key={index}
-              className="flex gap-6 h-fit bg-white rounded-xl p-6">
-              <div className="w-[10rem] h-[10rem] border-[2px] p-3 rounded-lg ">
-                <img
-                  className="w-full h-full object-cover"
-                  src="/assets/images/event.svg"
-                  alt="event"
-                />
-              </div>
-              <div className="flex flex-col justify-between">
-                <div>
-                  <h2 className="text-[1.2rem] font-[800] text-primary ">
-                    titre de l'evenement
-                  </h2>
-                  <p className="text-[#727272] text-[14px] ">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Dolores vel sit rerum, assumenda eveniet earum?
-                  </p>
-                </div>
-                <div className="bg-[#ddd] w-fit px-5 rounded-full text-[12px] font-[700] ">
-                  sexuel
-                </div>
-                <div className="font-[500]  text-[14px] flex items-center justify-between">
-                  <p>
-                    <span className="text-[#919191]">started</span> 15 July 2024
-                  </p>
-                  <AvatarCircles numPeople={99} avatarUrls={avatarUrls} />
-                </div>
-              </div>
-            </div>
-          );
-        })}
+      <div className="w-[80%]">
+        <Accordion type="single" collapsible className="w-full">
+          {myCourse &&
+            myCourse?.map((value: FormationType, index: number) => {
+              return (
+                <AccordionItem key={index} value={`item-${index}`}>
+                  <AccordionTrigger>
+                    <div className="flex justify-between items-center w-full">
+                      <div className="flex items-center gap-2">
+                        <div className="w-[6rem] h-[6rem] overflow-hidden rounded-xl ">
+                          <img
+                            className="w-full h-full object-cover"
+                            src="/assets/icons/formation_.png"
+                            alt="formation"
+                          />
+                        </div>
+                        <div className="text-left">
+                          <h1 className="text-[1.2rem] font-[800]">
+                            {value?.name_formation}
+                          </h1>
+                          <small className="text-left">Formation</small>
+                        </div>
+                      </div>
+                      <div className="border p-2 rounded-sm bg-green-100">
+                        <p
+                          onClick={() => {
+                            setIdFormation(value?.id_formation);
+                            handleOpen();
+                          }}>
+                          ajouter une session
+                        </p>
+                      </div>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <div className="flex flex-col gap-4">
+                      {/* @ts-ignore */}
+                      {value?.sessions?.map((value, index) => {
+                        return (
+                          <div
+                            key={index}
+                            className="border-[2px] flex flex-col gap-4 rounded-sm p-4 ">
+                            <p>Session N° {index + 1}</p>
+                            <div className="flex items-center justify-between bg-secondary p-2 rounded-xl">
+                              <span>
+                                Titre : <strong>{value?.titre}</strong>
+                              </span>
+                              <div className="flex cursor-pointer border p-2 items-center  rounded-lg bg-green-100 gap-2">
+                                <span>Tout télécharger</span>
+                                <img
+                                  src="/assets/icons/download.png"
+                                  alt="download"
+                                  className="w-[1.5rem]"
+                                />
+                              </div>
+                            </div>
+                            {/* @ts-ignore */}
+                            {value?.files?.map((file, index) => {
+                              return (
+                                <div
+                                  key={index}
+                                  className="flex p-2 justify-between items-center border-b mt-2">
+                                  <div className="font-[700] text-[12px] ">
+                                    cours N° {index + 1}
+                                  </div>
+                                  <div className="cursor-pointer">
+                                    <img
+                                      src="/assets/icons/download.png"
+                                      alt="download"
+                                      className="w-[1.2rem]"
+                                    />
+                                  </div>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              );
+            })}
+        </Accordion>
       </div>
       <div className="bg-white w-[50%] p-4 h-fit">
         <h2 className="text-[#5A48B4] text-[1.2rem] mb-4 font-[800] ">
@@ -123,6 +271,51 @@ const AllEvent = () => {
           className="rounded-md border w-full"
         />
       </div>
+
+      <Dialog open={isOpen} onOpenChange={handleOpen}>
+        <DialogTrigger asChild></DialogTrigger>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Edit profile</DialogTitle>
+            <DialogDescription>
+              Make changes to your profile here. Click save when you're done.
+            </DialogDescription>
+          </DialogHeader>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="grid gap-4 py-4">
+              <div className="flex flex-col gap-2">
+                <label htmlFor="name">Titre du session</label>
+                <Input {...register("titre")} className="col-span-3" />
+              </div>
+              <div className="flex flex-col gap-2">
+                <label htmlFor="username">Decription</label>
+                <Input
+                  {...register("description")}
+                  id="username"
+                  className="col-span-3"
+                />
+              </div>
+              <div className="flex flex-col gap-2">
+                <label htmlFor="files">Fichier associer</label>
+                <Input
+                  type="file"
+                  onChange={handleFileUpload}
+                  multiple
+                  className="col-span-3"
+                  accept="application/pdf,video/*"
+                />
+              </div>
+            </div>
+            {!isLoading && <Button type="submit">Enrégistrer</Button>}
+            {isLoading && (
+              <Button disabled className="flex items-center gap-2">
+                <Loader2Icon className="animate-spin h-4 w-4" />
+                Enrégistrer
+              </Button>
+            )}
+          </form>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

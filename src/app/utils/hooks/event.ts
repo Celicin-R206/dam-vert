@@ -30,3 +30,26 @@ export const postEvent = async (
     throw error;
   }
 };
+
+export const useMyEvent = (token: string | undefined) => {
+  const { data, error, mutate } = useSWR(
+    token ? [`${API_URL}evenements/filter/`, token] : null,
+    fetcherProtected
+  );
+  return {
+    myEvent: data,
+    isLoading: !error && !data,
+    isError: error,
+    mutate,
+  };
+};
+
+export const useAllEvent = () => {
+  const { data, error, mutate } = useSWR(`${API_URL}evenements/list/`, fetcher);
+  return {
+    allEvent: data,
+    isLoading: !error && !data,
+    isError: error,
+    mutate,
+  };
+};
