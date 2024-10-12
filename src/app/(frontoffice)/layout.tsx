@@ -71,12 +71,11 @@ export default function FrontOfficeLayout({
   return (
     <>
       {!loading && (
-        <div>
+        <div className="relative">
           {children}
           <section className="border">
             <div className="w-[1150px] m-auto py-[2rem]">
               <Footer />
-
               <button
                 onClick={scrollToTop}
                 className={cn(

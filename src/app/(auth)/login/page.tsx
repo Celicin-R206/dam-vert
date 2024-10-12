@@ -36,13 +36,15 @@ const Register = () => {
     setIsLoading(true);
     login(data?.email, data?.password)
       .then((res) => {
-        if (res?.is_client) {
+        console.log(res);
+        if (res?.is_user) {
           window.location.href = "/profile";
+          setIsLoading(false);
         }
-        if (!res?.is_client) {
+        if (!res?.is_user) {
           window.location.href = "/backoffice/home";
+          setIsLoading(false);
         }
-        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);

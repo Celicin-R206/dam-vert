@@ -22,7 +22,7 @@ const Formation = () => {
 
   return (
     <div>
-      <h2 className="text-[1.2rem] font-[800] ">Liste de mes formations</h2>
+      <h2 className="text-[1.2rem] font-[800] ">Formations suivie</h2>
       <Accordion type="single" collapsible className="w-full">
         {ClientCourse &&
           ClientCourse?.map((value: FormationType, index: number) => {

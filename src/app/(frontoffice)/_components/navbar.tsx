@@ -93,45 +93,56 @@ const Navbar = () => {
           </div>
         )}
         {user?.access && (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <div className="flex gap-3 items-center cursor-pointer">
-                <div className="w-[2.5rem] h-[2.5rem] rounded-full overflow-hidden ">
-                  <Image
-                    className="w-full h-full object-cover"
-                    src={"/assets/images/fakeFace.jpeg"}
-                    width={500}
-                    height={500}
-                    alt="image"
-                  />
+          <div className="flex items-center gap-3">
+            {" "}
+            <div className="flex border px-3 py-1 rounded-full items-center gap-2">
+              <img
+                className="w-[1.5rem]"
+                src="/assets/icons/solde.svg"
+                alt="solde"
+              />
+              <p className="font-[700]">50000.00 MGA</p>
+            </div>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <div className="flex gap-3 items-center cursor-pointer">
+                  <div className="w-[2.5rem] h-[2.5rem] rounded-full overflow-hidden ">
+                    <Image
+                      className="w-full h-full object-cover"
+                      src={"/assets/images/fakeFace.jpeg"}
+                      width={500}
+                      height={500}
+                      alt="image"
+                    />
+                  </div>
+                  <div className="leading-[15px]">
+                    <h1 className="font-[800]">{user?.name}</h1>
+                    <small>customer</small>
+                  </div>
                 </div>
-                <div className="leading-[15px]">
-                  <h1 className="font-[800]">{user?.name}</h1>
-                  <small>customer</small>
-                </div>
-              </div>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56 mt-6">
-              <DropdownMenuLabel>Cité dame vert</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuGroup>
-                <DropdownMenuItem>
-                  <User className="mr-2 h-4 w-4" />
-                  <Link href={"/profile"}>
-                    <span>Mon profile</span>
-                  </Link>
-                  <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <CreditCard className="mr-2 h-4 w-4" />
-                  <Link href={"/register"}>
-                    <span>Déconnexion</span>
-                  </Link>
-                  <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
-                </DropdownMenuItem>
-              </DropdownMenuGroup>
-            </DropdownMenuContent>
-          </DropdownMenu>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56 mt-6">
+                <DropdownMenuLabel>Cité dame vert</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuGroup>
+                  <DropdownMenuItem>
+                    <User className="mr-2 h-4 w-4" />
+                    <Link href={"/profile"}>
+                      <span>Mon profile</span>
+                    </Link>
+                    <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <CreditCard className="mr-2 h-4 w-4" />
+                    <Link href={"/register"}>
+                      <span>Déconnexion</span>
+                    </Link>
+                    <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+                  </DropdownMenuItem>
+                </DropdownMenuGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
         )}
       </div>
     </div>
