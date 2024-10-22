@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import Navbar from "../_components/navbar";
 import {
   MapContainer,
   TileLayer,
@@ -14,7 +13,6 @@ import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import "leaflet-control-geocoder";
 import LeafletGeocoder from "../_components/map/Geocoder";
-import { gsap } from "gsap";
 
 // Configuration de l'icône de Leaflet
 delete L.Icon.Default.prototype._getIconUrl;
@@ -27,11 +25,8 @@ L.Icon.Default.mergeOptions({
 
 const Page = () => {
   return (
-    <div>
-      <div className="w-[1150px] m-auto">
-        <div className="py-8">
-          <Navbar />
-        </div>
+    <div className="mt-[7rem]">
+      <div className="w-[80%] m-auto">
         <Map />
       </div>
     </div>

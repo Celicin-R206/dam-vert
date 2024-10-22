@@ -8,6 +8,7 @@ import { useScroll } from "framer-motion";
 import { ArrowUpIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import Navbar from "./_components/navbar";
 
 export default function FrontOfficeLayout({
   children,
@@ -68,13 +69,37 @@ export default function FrontOfficeLayout({
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <>
       {!loading && (
         <div className="relative">
+          <div
+            className={`w-full top-0 z-50 fixed bg-white
+            }`}>
+            <Navbar />
+          </div>
           {children}
           <section className="border">
-            <div className="w-[1150px] m-auto py-[2rem]">
+            <div className="w-[80%] m-auto py-[2rem]">
               <Footer />
               <button
                 onClick={scrollToTop}

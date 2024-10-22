@@ -1,12 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { EyeIcon, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
 
 type cardProps = {
   value: any;
 };
 
 const CardShop: React.FC<cardProps> = ({ value }) => {
+  const [isOpen, seIsOpen] = useState(false);
+  const handleDialog = () => {
+    seIsOpen(!isOpen);
+  };
+
   return (
     <div className="border rounded-2xl group">
       <div className="w-full grid place-content-center">
@@ -49,6 +62,18 @@ const CardShop: React.FC<cardProps> = ({ value }) => {
           <Button>Acheter</Button>
         </div>
       </div>
+
+      <Dialog open={isOpen} onOpenChange={handleDialog}>
+        <DialogTrigger asChild>
+          <Button variant="outline">Edit Profile</Button>
+        </DialogTrigger>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle></DialogTitle>
+          </DialogHeader>
+          <div></div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

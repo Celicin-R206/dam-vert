@@ -13,12 +13,8 @@ const Page = () => {
   const { allProduct } = useAllProduct();
   return (
     <div>
-      <div className="h-[33rem] pb-6 bg-[url('/assets/images/bg-shop.jpg')] bg-fixed bg-no-repeat bg-cover w-full ">
-        <div className="w-[1150px] m-auto relative ">
-          <div className="py-8">
-            <Navbar />
-          </div>
-
+      <div className="h-[30rem] flex items-center justify-center mt-[6rem] pb-6 bg-[url('/assets/images/bg-shop.jpg')] bg-fixed bg-no-repeat bg-cover w-full ">
+        <div className="w-[85%] m-auto relative ">
           <div className="my-carousel">
             <Slider {...settings}>
               <div className="h-[20rem] p-2 rounded-2xl overflow-hidden">

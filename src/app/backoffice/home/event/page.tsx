@@ -11,7 +11,7 @@ import {
 import AvatarCircles from "@/components/ui/avatar-circles";
 import Link from "next/link";
 import { useMyEvent } from "@/app/utils/hooks/event";
-import { useUserStore } from "@/app/utils/stores/cookie";
+import { usePartnerStore, useUserStore } from "@/app/utils/stores/cookie";
 import { EventType } from "@/app/utils/types/api";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useRouter } from "next/navigation";
@@ -24,13 +24,13 @@ const avatarUrls = [
 
 const Page = () => {
   const [active, setActive] = useState("all");
-  const { user, loadUser } = useUserStore();
+  const { partner, loadPartner } = usePartnerStore();
   useEffect(() => {
-    if (!user) {
-      loadUser();
+    if (!partner) {
+      loadPartner();
     }
-  }, [user, loadUser]);
-  const { myEvent } = useMyEvent(user?.access ?? "");
+  }, [partner, loadPartner]);
+  const { myEvent } = useMyEvent(partner?.access ?? "");
 
   return (
     <div>

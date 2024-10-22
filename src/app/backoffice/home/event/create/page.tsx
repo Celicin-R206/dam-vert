@@ -25,7 +25,7 @@ import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
-import { useUserStore } from "@/app/utils/stores/cookie";
+import { usePartnerStore, useUserStore } from "@/app/utils/stores/cookie";
 import { useCoordonnerStore } from "@/app/utils/stores/eventStore";
 import { Map } from "@/app/backoffice/_components/map/page";
 import { Calendar } from "@/components/ui/calendar";
@@ -63,12 +63,12 @@ const Page = () => {
   const { coordonner } = useCoordonnerStore();
   const router = useRouter();
 
-  const { user, loadUser } = useUserStore();
+  const { partner, loadPartner } = usePartnerStore();
   useEffect(() => {
-    if (!user) {
-      loadUser();
+    if (!partner) {
+      loadPartner();
     }
-  }, [user, loadUser]);
+  }, [partner, loadPartner]);
 
   const [date1, setDate1] = React.useState<Date>();
   const [date2, setDate2] = React.useState<Date>();
@@ -99,7 +99,7 @@ const Page = () => {
         formData.append("images", image);
       }
       setIsoloading(true);
-      await postEvent(formData, user?.access ?? "")
+      await postEvent(formData, partner?.access ?? "")
         .then(() => {
           setIsoloading(false);
           toast.success("Votre evenement a été publiée avec succès !", {

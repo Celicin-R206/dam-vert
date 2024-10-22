@@ -4,17 +4,17 @@ import { useAllCourse } from "@/app/utils/hooks/course";
 import { useUserStore } from "@/app/utils/stores/cookie";
 
 const All = () => {
-  const { user, loadUser } = useUserStore();
+  const { client, loadClient } = useUserStore();
   useEffect(() => {
-    if (!user) {
-      loadUser();
+    if (!client) {
+      loadClient();
     }
-  }, [user, loadUser]);
+  }, [client, loadClient]);
 
-  const { allCourse } = useAllCourse(user?.access ?? "");
+  const { allCourse } = useAllCourse(client?.access ?? "");
 
   return (
-    <div className="grid grid-cols-3 gap-4 mt-6">
+    <div className="grid grid-cols-3 custom-950:grid-cols-2 custom-768:grid-cols-1 gap-4 mt-6">
       {allCourse?.map((value: any, index: any) => {
         return (
           <div key={index}>

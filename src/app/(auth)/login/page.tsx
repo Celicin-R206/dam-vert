@@ -38,12 +38,18 @@ const Register = () => {
       .then((res) => {
         console.log(res);
         if (res?.is_user) {
-          window.location.href = "/profile";
           setIsLoading(false);
+
+          const dataCookie = JSON.stringify(res);
+          document.cookie = `clientCustomer=${dataCookie}; path=/`;
+          window.location.href = "/profile";
         }
         if (!res?.is_user) {
-          window.location.href = "/backoffice/home";
           setIsLoading(false);
+
+          const dataCookie = JSON.stringify(res);
+          document.cookie = `partnerCustomer=${dataCookie}; path=/`;
+          window.location.href = "/backoffice/home";
         }
       })
       .catch((err) => {

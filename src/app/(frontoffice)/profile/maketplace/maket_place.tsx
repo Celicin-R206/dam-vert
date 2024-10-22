@@ -60,14 +60,14 @@ const MarketPlace = () => {
     resolver: zodResolver(productSchema),
   });
 
-  const { user, loadUser } = useUserStore();
+  const { client, loadClient } = useUserStore();
   useEffect(() => {
-    if (!user) {
-      loadUser();
+    if (!client) {
+      loadClient();
     }
-  }, [user, loadUser]);
+  }, [client, loadClient]);
 
-  const { myProduct, mutate } = useMyProduct(user?.access);
+  const { myProduct, mutate } = useMyProduct(client?.access);
 
   const onSubmit = async (data: ProductForm) => {
     setIsLoading(true);
@@ -80,7 +80,7 @@ const MarketPlace = () => {
       formData.append("description", data.description);
       formData.append("images", data.file[0]);
 
-      await postProduct(formData, user?.access)
+      await postProduct(formData, client?.access)
         .then((res) => {
           console.log(res);
           setIsLoading(false);

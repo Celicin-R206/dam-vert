@@ -5,7 +5,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { PlusIcon } from "lucide-react";
 import Link from "next/link";
 import { postSession, useMyCourse } from "@/app/utils/hooks/course";
-import { useUserStore } from "@/app/utils/stores/cookie";
+import { usePartnerStore, useUserStore } from "@/app/utils/stores/cookie";
 import {
   Accordion,
   AccordionContent,
@@ -125,21 +125,19 @@ const AllCourse = () => {
     setIsOpen(!isOpen);
   };
 
-  const { user, loadUser } = useUserStore();
+  const { partner, loadPartner } = usePartnerStore();
   useEffect(() => {
-    if (!user) {
-      loadUser();
+    if (!partner) {
+      loadPartner();
     }
-  }, [user, loadUser]);
+  }, [partner, loadPartner]);
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     setFiles(files);
   };
 
-  const { myCourse } = useMyCourse(user?.access ?? "");
-
-  console.log(myCourse);
+  const { myCourse } = useMyCourse(partner?.access ?? "");
 
   const onSubmit = async (data: SessionForm) => {
     if (data && idFormation) {
@@ -155,7 +153,7 @@ const AllCourse = () => {
       }
 
       setIsoloading(true);
-      await postSession(formData, user?.access ?? "")
+      await postSession(formData, partner?.access ?? "")
         .then(() => {
           setIsoloading(false);
           toast.success("Votre formation a été publiée avec succès !", {

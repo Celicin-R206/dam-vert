@@ -1,23 +1,23 @@
 "use client";
 
-import { useUserStore } from "@/app/utils/stores/cookie";
+import { usePartnerStore } from "@/app/utils/stores/cookie";
 import { CalendarClockIcon, Filter, MapPinIcon, Users } from "lucide-react";
 import React, { useEffect } from "react";
 
 const Page = () => {
-  const { user, loadUser } = useUserStore();
+  const { partner, loadPartner } = usePartnerStore();
 
   useEffect(() => {
-    if (!user) {
-      loadUser();
+    if (!partner) {
+      loadPartner();
     }
-  }, [user, loadUser]);
+  }, [partner, loadPartner]);
 
   return (
     <div>
       <div className="mt-[2rem]">
         <h1 className="text-[2rem] font-[800] text-[#5A48B4] ">
-          👋 Bonjour {user && user?.name}
+          👋 Bonjour {partner && partner?.name}
         </h1>
         <div className="mt-8 grid grid-cols-2 gap-6">
           <div className="flex bg-[#FFDCD6] p-6 rounded-xl text-[#E54338] gap-4">

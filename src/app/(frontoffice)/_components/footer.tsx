@@ -4,7 +4,7 @@ import { FacebookIcon, InstagramIcon, TwitterIcon } from "lucide-react";
 const Footer = () => {
   return (
     <div>
-      <div className="flex mb-4">
+      <div className="flex custom-640:flex-col custom-640:gap-14 mb-4">
         <div className="w-[40%]">
           <h1 className="font-[900]">logo</h1>
           <small>
@@ -12,7 +12,7 @@ const Footer = () => {
             deserunt nihil veritatis minus tempora molestias ullam.
           </small>
         </div>
-        <div className="flex gap-14 w-[100%] justify-end ">
+        <div className="flex gap-14 custom-640:flex-col w-[100%] justify-end ">
           <div>
             <h2 className="font-[900]">About</h2>
             <ul className="flex flex-col gap-2 mt-3 text-[13px]">

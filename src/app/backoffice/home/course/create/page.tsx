@@ -10,7 +10,7 @@ import toast from "react-hot-toast";
 
 import { Input } from "@/components/ui/input";
 
-import { useUserStore } from "@/app/utils/stores/cookie";
+import { usePartnerStore, useUserStore } from "@/app/utils/stores/cookie";
 import Link from "next/link";
 import { Loader2Icon } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -48,12 +48,12 @@ const Page = () => {
 
   const is_free = watch();
 
-  const { user, loadUser } = useUserStore();
+  const { partner, loadPartner } = usePartnerStore();
   useEffect(() => {
-    if (!user) {
-      loadUser();
+    if (!partner) {
+      loadPartner();
     }
-  }, [user, loadUser]);
+  }, [partner, loadPartner]);
 
   const [isLoading, setIsoloading] = useState(false);
 
@@ -74,7 +74,7 @@ const Page = () => {
       }
 
       setIsoloading(true);
-      await postCourse(formData, user?.access ?? "")
+      await postCourse(formData, partner?.access ?? "")
         .then(() => {
           setIsoloading(false);
           toast.success("Votre formation a été publiée avec succès !", {

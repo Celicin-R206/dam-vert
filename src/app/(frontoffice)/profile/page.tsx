@@ -10,10 +10,12 @@ import {
   ContactIcon,
   Package2Icon,
 } from "lucide-react";
-import Navbar from "../_components/navbar";
 import Formation from "./formation/formation";
 import Menstrual from "./menstrual/page";
 import MarketPlace from "./maketplace/maket_place";
+import { useUserStore } from "@/app/utils/stores/cookie";
+import AccountSetting from "./acount/acount";
+import Meet from "./meeting/meeting";
 
 const Page = () => {
   const [activeTab, setActiveTab] = useState("account");
@@ -21,7 +23,7 @@ const Page = () => {
   const renderTabContent = () => {
     switch (activeTab) {
       case "account":
-        return <p></p>;
+        return <AccountSetting />;
       case "menstrual":
         return <Menstrual />;
 
@@ -30,16 +32,22 @@ const Page = () => {
 
       case "marketplace":
         return <MarketPlace />;
+      case "meet":
+        return <Meet />;
       default:
         return null;
     }
   };
 
+  const { client, loadClient } = useUserStore();
+  useEffect(() => {
+    if (!client) {
+      loadClient();
+    }
+  }, [client, loadClient]);
+
   return (
     <div className="pb-[5rem]">
-      <div className="w-[1150px] m-auto relative ">
-        <Navbar />
-      </div>
       <section className="flex items-center bg-no-repeat bg-cover bg-center h-[20rem]">
         <Image
           className="w-full h-full object-cover"
@@ -94,7 +102,7 @@ const Page = () => {
             <div className="bg-border flex custom-768:flex-col custom-768:gap-8 custom-768:items-start justify-between items-center p-[1.2rem] rounded-lg">
               <ul className="flex gap-4  custom-640:text-[12px] custom-640:flex-wrap">
                 <li
-                  className={`py-2 px-4 flex items-center gap-1 rounded-full cursor-pointer ${
+                  className={`py-2 px-4 text-[13px] flex items-center gap-1 rounded-full cursor-pointer ${
                     activeTab === "account"
                       ? "bg-green-600 text-white"
                       : "bg-white"
@@ -103,7 +111,7 @@ const Page = () => {
                   <ContactIcon className="w-[1.2rem]" /> Mon compte
                 </li>
                 <li
-                  className={`py-2 px-4 flex items-center gap-1 rounded-full cursor-pointer ${
+                  className={`py-2 px-4 text-[13px] flex items-center gap-1 rounded-full cursor-pointer ${
                     activeTab === "menstrual"
                       ? "bg-green-600 text-white"
                       : "bg-white"
@@ -112,8 +120,20 @@ const Page = () => {
                   <Package2Icon className="w-[1.2rem]" />
                   Menstruations
                 </li>
+                {/* {client?.access && (
+                  <li
+                    className={`py-2 px-4 text-[13px] flex items-center gap-1 rounded-full cursor-pointer ${
+                      activeTab === "menstrual"
+                        ? "bg-green-600 text-white"
+                        : "bg-white"
+                    }`}
+                    onClick={() => setActiveTab("menstrual")}>
+                    <Package2Icon className="w-[1.2rem]" />
+                    Menstruations
+                  </li>
+                )} */}
                 <li
-                  className={`py-2 px-4 flex items-center gap-1 rounded-full cursor-pointer ${
+                  className={`py-2 px-4 text-[13px] flex items-center gap-1 rounded-full cursor-pointer ${
                     activeTab === "demande"
                       ? "bg-green-600 text-white"
                       : "bg-white"
@@ -122,7 +142,7 @@ const Page = () => {
                   <InboxIcon className="w-[1.2rem]" /> Evenement(s)
                 </li>
                 <li
-                  className={`py-2 px-4 flex items-center gap-1 rounded-full cursor-pointer ${
+                  className={`py-2 px-4 text-[13px] flex items-center gap-1 rounded-full cursor-pointer ${
                     activeTab === "formation"
                       ? "bg-green-600 text-white"
                       : "bg-white"
@@ -132,7 +152,7 @@ const Page = () => {
                 </li>
 
                 <li
-                  className={`py-2 px-4 flex items-center gap-1 rounded-full cursor-pointer ${
+                  className={`py-2 px-4 text-[13px] flex items-center gap-1 rounded-full cursor-pointer ${
                     activeTab === "marketplace"
                       ? "bg-green-600 text-white"
                       : "bg-white"
@@ -140,6 +160,16 @@ const Page = () => {
                   onClick={() => setActiveTab("marketplace")}>
                   <Package2Icon className="w-[1.2rem]" />
                   MarketPlace
+                </li>
+                <li
+                  className={`py-2 px-4 text-[13px] flex items-center gap-1 rounded-full cursor-pointer ${
+                    activeTab === "meet"
+                      ? "bg-green-600 text-white"
+                      : "bg-white"
+                  }`}
+                  onClick={() => setActiveTab("meet")}>
+                  <Package2Icon className="w-[1.2rem]" />
+                  Consultation
                 </li>
               </ul>
             </div>

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Accordion,
   AccordionContent,
@@ -8,17 +8,27 @@ import {
 import { useClientCourse } from "@/app/utils/hooks/course";
 import { useUserStore } from "@/app/utils/stores/cookie";
 import { FormationType } from "@/app/utils/types/api";
-import { PlayIcon } from "lucide-react";
+import { AirplayIcon, PlayIcon, XIcon } from "lucide-react";
+import HeroVideoDialog from "@/components/ui/hero-video-dialog";
 
 const Formation = () => {
-  const { user, loadUser } = useUserStore();
+  const { client, loadClient } = useUserStore();
   useEffect(() => {
-    if (!user) {
-      loadUser();
+    if (!client) {
+      loadClient();
     }
-  }, [user, loadUser]);
+  }, [client, loadClient]);
 
-  const { ClientCourse } = useClientCourse(user?.access);
+  const { ClientCourse } = useClientCourse(client?.access);
+
+  const [fileUrl, setFileUrl] = useState("");
+  const [playVideo, setPlayVideo] = useState(false);
+
+  const seeVideo = (file: string) => {
+    console.log(file);
+    setFileUrl(file);
+    setPlayVideo(true);
+  };
 
   return (
     <div>
@@ -42,7 +52,14 @@ const Formation = () => {
                         <h1 className="text-[1.2rem] font-[800]">
                           {value?.name_formation}
                         </h1>
-                        <small className="text-left">Formation</small>
+                        <div className="flex flex-col leading-[15px] mt-4">
+                          <small className="text-left">Formation</small>
+                          <small className="text-left flex items-center gap-2">
+                            <AirplayIcon className="w-[1rem]" />{" "}
+                            {/* @ts-ignore */}
+                            {value?.sessions?.length} session(s)
+                          </small>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -87,7 +104,10 @@ const Formation = () => {
                                       className="w-[1.2rem]"
                                     />
                                   </div>
-                                  <div className="cursor-pointer flex items-center gap-1 bg-red-500 text-white rounded-full p-1 px-4 ">
+                                  <div
+                                    // @ts-ignore
+                                    onClick={() => seeVideo(file?.file_url)}
+                                    className="cursor-pointer flex items-center gap-1 bg-red-500 text-white rounded-full p-1 px-4 ">
                                     <PlayIcon className="w-[1rem] stroke-[3px] " />
                                   </div>
                                 </div>
@@ -103,6 +123,23 @@ const Formation = () => {
             );
           })}
       </Accordion>
+
+      {playVideo && fileUrl && (
+        <div className="fixed top-0 left-0 w-full grid place-content-center h-full bg-black">
+          <div className="border rounded-2xl mn-h-[30rem] relative p-4 mt-24">
+            <button
+              onClick={() => setPlayVideo(false)}
+              className="text-white border px-4 py-1 rounded-full w-fit">
+              Sortir
+            </button>
+
+            <video controls width="600" className="relative mt-2 object-cover">
+              <source src={fileUrl} type="video/mp4" />
+              Votre navigateur ne supporte pas la lecture vidéo.
+            </video>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

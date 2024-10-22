@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import Navbar from "../_components/navbar";
-import Image from "next/image";
 import Marquee from "@/components/ui/marquee";
 import { CalendarClockIcon, SearchIcon } from "lucide-react";
 import { useAllEvent } from "@/app/utils/hooks/event";
@@ -25,16 +23,9 @@ const Page = () => {
 
   return (
     <div>
-      <div className="h-[28rem] bg-[url('/assets/images/bg-event.jpg')] bg-fixed bg-no-repeat bg-cover w-full ">
-        <div className="w-[1150px] m-auto relative ">
-          <div className="py-8">
-            <Navbar />
-          </div>
-          <div className="hero flex items-center mt-[3rem] flex-col gap-5">
-            <div className="text-[4rem] text-white font-[1000] text-center relative ">
-              <h1>Evenements</h1>
-            </div>
-          </div>
+      <div className="h-[25rem] flex items-center justify-center bg-[url('/assets/images/bg-event.jpg')] bg-fixed bg-no-repeat bg-cover w-full ">
+        <div className="text-[4rem] pt-[4rem] custom-850:text-[2rem] text-white font-[1000] text-center relative ">
+          <h1>Evenements</h1>
         </div>
       </div>
 
@@ -46,8 +37,8 @@ const Page = () => {
         </h4>
       </Marquee>
 
-      <div className="w-[1150px] m-auto py-8 flex gap-8">
-        <div className="border p-3 rounded-xl h-fit sticky top-8">
+      <div className="w-[85%] custom-1150:w-[90%] m-auto py-8 flex custom-850:flex-col gap-8">
+        <div className="border p-3 rounded-xl h-fit sticky custom-850:relative top-[7rem]">
           <span className="border flex rounded-xl items-center gap-1 w-fit p-2">
             <input
               className="outline-none w-[18rem] "
@@ -93,9 +84,8 @@ const Page = () => {
         </div>
         <div className="w-full">
           <div className="flex items-center justify-between border rounded-lg bg-white p-2">
-            <p className="text-[#808080]">Showing 1–9 of 24 results</p>
-            <div className="flex items-center gap-3">
-              <p className="text-[#808080]">filtrer par</p>
+            <p className="text-[#808080]">Showing 24 results</p>
+            <div>
               <select
                 name="filter"
                 className="w-[15rem] border outline-none py-2 rounded-lg"
@@ -107,7 +97,7 @@ const Page = () => {
               </select>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-6 mt-14">
+          <div className="grid grid-cols-2 custom-1150:grid-cols-1 gap-6 mt-14">
             {allEvent?.map((value: EventType, index: number) => {
               return (
                 <div key={index}>

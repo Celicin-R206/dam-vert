@@ -73,10 +73,6 @@ export const login = async (email: string, password: string) => {
       }
     );
 
-    const dataCookie = JSON.stringify(res.data);
-
-    document.cookie = `userCustomer=${dataCookie}; path=/`;
-
     return res.data;
   } catch (error) {
     console.error("Login failed", error);
