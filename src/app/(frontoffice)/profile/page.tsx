@@ -9,6 +9,8 @@ import {
   CameraIcon,
   ContactIcon,
   Package2Icon,
+  BriefcaseIcon,
+  RulerIcon,
 } from "lucide-react";
 import Formation from "./formation/formation";
 import Menstrual from "./menstrual/page";
@@ -117,7 +119,7 @@ const Page = () => {
                       : "bg-white"
                   }`}
                   onClick={() => setActiveTab("menstrual")}>
-                  <Package2Icon className="w-[1.2rem]" />
+                  <RulerIcon className="w-[1.2rem]" />
                   Menstruations
                 </li>
                 {/* {client?.access && (
@@ -168,8 +170,8 @@ const Page = () => {
                       : "bg-white"
                   }`}
                   onClick={() => setActiveTab("meet")}>
-                  <Package2Icon className="w-[1.2rem]" />
-                  Consultation
+                  <BriefcaseIcon className="w-[1.2rem]" />
+                  Suivie santé
                 </li>
               </ul>
             </div>

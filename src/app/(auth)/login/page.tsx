@@ -104,10 +104,12 @@ const Register = () => {
             )}
           </span>
         </form>
-        <div className="bottom_login">
-          <p>Sign in with a passkey</p>
+        <div className="bottom_login p-4">
           <p>
-            New to Pioneer? <Link href={"/register"}>Create an account</Link>
+            Vous êtes nouveau chez Pioneer ?{" "}
+            <Link href={"/register"}>
+              <span className="underline text-blue-700">Créez un compte.</span>{" "}
+            </Link>
           </p>
         </div>
       </div>

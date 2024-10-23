@@ -31,13 +31,13 @@ const Page = () => {
         <div className="px-[5rem] custom-640:px-[2rem] relative ">
           <div className="hero flex items-center pt-[11rem] flex-col gap-5">
             <div className="text-[4rem] custom-950:text-[3rem] custom-768:text-[2.5rem] custom-640:text-[1.5rem] font-[900] text-center relative ">
-              <h1>Make An Impact &</h1>
+              <h1>Un avenir Sain </h1>
 
               <h1 className="flex">
-                Give Back To
+                Pour
                 <span className="text-primary ml-4 n flex items-center flex-col relative">
                   <FlipWords
-                    words={["Nature", "Impacte"]}
+                    words={["Vous", "La-planete"]}
                     className="font-serif italic text-primary"
                   />
                   <svg
@@ -56,9 +56,11 @@ const Page = () => {
               </h1>
             </div>
             <p className="w-[70%] custom-768:w-full m-auto text-center">
-              Voluptates consectetur porro dolore. Quibusdam hac veniam dolorem
-              soluta ab consectetur architecto. Repellendus nec, eget vivamus
-              quo illo, illum curae, alias egestas aut rerum impedit.
+              Prenez soin de votre santé sexuelle tout en agissant pour un
+              environnement durable. Ensemble, combattons les effets du
+              changement climatique et protégeons notre planète, tout en offrant
+              des ressources et des conseils essentiels pour le bien-être des
+              femmes.
             </p>
             <div className="flex items-center custom-768:flex-col-reverse gap-4">
               <Button className="py-6 px-5 rounded-full flex items-center gap-2">
@@ -84,14 +86,17 @@ const Page = () => {
         <div className="w-[80%] m-auto flex gap-14 custom-950:flex-col ">
           <div className="text-white  w-full flex flex-col gap-4 ">
             <h2 className="text-[2.5rem] custom-768:text-[1.8rem] font-[900] relative">
-              Let's Join To Build The Better World{" "}
-              <span className="text-secondary">Together </span>
+              Renforcer l'autonomisation des femmes et leur santé sexuelle face
+              aux
+              <span className="text-secondary"> défis climatiques</span>
             </h2>
             <p className="z-10 mt-6">
-              Odit fugit excepteur eiusmod fames, aliqua odio phasellus aliqua
-              aenean, ratione primis. Nobis molestie adipisicing iaculis vel do,
-              assumenda rutrum? Consequatur unde impedit scelerisque cillum
-              aliqua odio phasellus .
+              Ensemble, nous œuvrons pour un monde où la santé sexuelle des
+              femmes et la protection de l'environnement sont au cœur des
+              priorités. En unissant nos efforts, nous créons des solutions
+              durables face aux défis du changement climatique, tout en
+              améliorant le bien-être des femmes à travers l'éducation et
+              l'accès à des ressources essentielles.
             </p>
           </div>
           <div className="w-full">
@@ -129,7 +134,9 @@ const Page = () => {
               />
               <h2 className="text-[1.2rem] font-[700] ">{value?.title}</h2>
               <p className="text-[14px]">{value?.description}</p>
-              <Button className="bg-primary rounded-full">DONATE NOW</Button>
+              <Button className="bg-primary rounded-full">
+                EN SAVOIR PLUS
+              </Button>
             </div>
           );
         })}
@@ -139,10 +146,11 @@ const Page = () => {
           <p className="text-[4rem] font-[1000] absolute left-[-1rem] text-secondary top-[50%] translate-y-[-50%] ">
             1.
           </p>
-          <h2 className="text-[1.3rem] font-[900]">Recurrring Donation</h2>
+          <h2 className="text-[1.3rem] font-[900]">Agir Ensemble</h2>
           <p>
-            Dolorem interdum iure pharetra quia sapien, ipsum eligendi rerum
-            volups tatibus sed dolor circum.
+            Ensemble, nous pouvons surmonter les défis environnementaux et
+            améliorer la santé des femmes. Chaque action compte pour un futur
+            plus vert et plus sain.
           </p>
         </div>
         <div className="bg-secondary py-6 px-[4rem] custom-950:px-[3rem] text-white relative ">
@@ -150,18 +158,20 @@ const Page = () => {
             2.
           </p>
           <h2 className="text-[1.3rem] font-[900] text-black ">
-            Ongoing Circumstance
+            Soutenir & Préserver
           </h2>
           <p className="text-black">
-            Dolorem interdum iure pharetra quia sapien, ipsum eligendi rerum
-            volups tatibus sed dolor circum.
+            En soutenant les initiatives de santé sexuelle et de protection de
+            l'environnement, nous préservons notre planète et assurons le
+            bien-être des générations futures.
           </p>
         </div>
       </div>
       <section className="w-[80%] m-auto py-[5rem]">
         <div className="flex relative items-center flex-col justify-center">
           <h1 className="text-[2.5rem] custom-640:text-[1.5rem] z-10 text-primary font-[900] relative w-fit">
-            Checkout Popular <span className="text-secondary">Causes</span>
+            Découvrez Nos Événements à{" "}
+            <span className="text-secondary">venir</span>
             <svg
               className="w-[8rem] custom-640:w-[5rem] custom-640:right-0 svg-nature absolute z-0 right-[-2rem]"
               viewBox="0 0 600 85"
@@ -177,11 +187,14 @@ const Page = () => {
           </h1>
 
           <p className="text-[3.5rem] custom-640:text-[2.5rem] top-[-2rem] opacity-5 z-0 uppercase font-[900] absolute">
-            popular causes
+            Événements à venir
           </p>
           <p className="mt-4 w-[50%] custom-640:w-full text-center relative ">
-            Assumenda occaecat cursus iaculis ab non, assumenda natoque aliquid
-            sunt fusce quasi quod unde, ridiculus.
+            Participez à nos événements enrichissants et engageants, conçus pour
+            sensibiliser et mobiliser des actions en faveur de la santé des
+            femmes et de la protection de l'environnement. Rejoignez-nous pour
+            faire la différence et créer un impact positif dans notre
+            communauté.
           </p>
         </div>
         <div>
@@ -284,23 +297,27 @@ const Page = () => {
 const dataFake = [
   {
     image: "/assets/icons/icon1-1.png",
-    title: "Solar Energy",
-    description: "Ad maxime magins nam phasellus lacus nostrud eaque quisque.",
+    title: "Météo",
+    description:
+      "Aidez à promouvoir l'énergie propre et renouvelable pour un avenir plus durable.",
   },
   {
     image: "/assets/icons/icon2-1.png",
-    title: "Planting Project",
-    description: "Ad maxime magins nam phasellus lacus nostrud eaque quisque.",
+    title: "Santé sexuel",
+    description:
+      "Assurez l'accès à l'éducation et aux soins pour des relations saines.",
   },
   {
     image: "/assets/icons/icon4-1.png",
-    title: "Recycle Project",
-    description: "Ad maxime magins nam phasellus lacus nostrud eaque quisque.",
+    title: "Projet de Recyclage",
+    description:
+      "Contribuez à réduire les déchets et à protéger notre planète grâce au recyclage.",
   },
   {
     image: "/assets/icons/icon3-1.png",
-    title: "Be A Volunteer",
-    description: "Ad maxime magins nam phasellus lacus nostrud eaque quisque.",
+    title: "Engagement",
+    description:
+      "Restez informé des prévisions pour mieux planifier vos activités.",
   },
 ];
 

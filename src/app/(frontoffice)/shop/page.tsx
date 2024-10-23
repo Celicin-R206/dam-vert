@@ -20,21 +20,21 @@ const Page = () => {
               <div className="h-[20rem] p-2 rounded-2xl overflow-hidden">
                 <img
                   className="w-full h-full object-cover"
-                  src="/assets/images/slide1.jpg"
+                  src="/assets/images/market-1.jpg"
                   alt="slide"
                 />
               </div>
               <div className="h-[20rem] p-2 rounded-2xl overflow-hidden">
                 <img
                   className="w-full h-full object-cover"
-                  src="/assets/images/slide2.jpg"
+                  src="/assets/images/market-2.jpg"
                   alt="slide"
                 />
               </div>
               <div className="h-[20rem] p-2 rounded-2xl overflow-hidden">
                 <img
                   className="w-full h-full object-cover"
-                  src="/assets/images/slide3.jpg"
+                  src="/assets/images/market-3.jpg"
                   alt="slide"
                 />
               </div>

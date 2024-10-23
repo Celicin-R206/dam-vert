@@ -39,7 +39,7 @@ export const useWomanInfo = (token: string | undefined) => {
     fetcherProtected
   );
   return {
-    woman_ifon: data,
+    woman_info: data,
     isLoading: !error && !data,
     isError: error,
     mutate,
@@ -47,7 +47,7 @@ export const useWomanInfo = (token: string | undefined) => {
 };
 export const useWomanInfoLast = (token: string | undefined) => {
   const { data, error, mutate } = useSWR(
-    token ? [`${API_URL}woman/last/`, token] : null,
+    token ? [`${API_URL}woman/info/last/`, token] : null,
     fetcherProtected
   );
   return {

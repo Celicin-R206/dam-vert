@@ -173,6 +173,11 @@ const navigation = [
     title: "Ma ville",
     link: "/map",
   },
+  {
+    id: 5,
+    title: "Météo",
+    link: "/Meteo",
+  },
 ];
 
 export default Navbar;

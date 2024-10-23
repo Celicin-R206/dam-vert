@@ -39,6 +39,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   postMenstruation,
+  useWomanInfo,
   useWomanInfoLast,
 } from "@/app/utils/hooks/menstruation";
 import { useUserStore } from "@/app/utils/stores/cookie";
@@ -82,8 +83,9 @@ const Menstrual = () => {
   };
 
   const { woman_ifon } = useWomanInfoLast(client?.access);
+  const { woman_info } = useWomanInfo(client?.access);
 
-  console.log(woman_ifon);
+  console.log(woman_info);
 
   return (
     <div>
@@ -210,7 +212,8 @@ const Menstrual = () => {
           </div>
         </div>
       </div>
-      <div className="mt-8">
+      <div></div>
+      {/* <div className="mt-8">
         <h1>autre</h1>
         <div>
           <div>
@@ -218,7 +221,7 @@ const Menstrual = () => {
           </div>
           <div className="mt-[3rem]"></div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

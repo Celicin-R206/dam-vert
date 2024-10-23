@@ -369,9 +369,8 @@ const Register = () => {
             </span>
           </form>
           <div className="bottom_register">
-            <p>Sign in with a passkey</p>
             <p>
-              New to Pioneer ? <Link href={"/login"}>Create an account</Link>
+              Déjà un compte <Link href={"/login"}>connecter vous</Link>
             </p>
           </div>
         </div>
@@ -488,9 +487,8 @@ const Register = () => {
             )}
           </form>
           <div className="bottom_register">
-            <p>Sign in with a passkey</p>
             <p>
-              New to Pioneer ? <Link href={"/login"}>Create an account</Link>
+              Déjà un compte <Link href={"/login"}>connecter vous</Link>
             </p>
           </div>
         </div>

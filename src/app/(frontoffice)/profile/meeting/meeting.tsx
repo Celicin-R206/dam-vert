@@ -1,49 +1,62 @@
-import { ContactIcon, InboxIcon } from "lucide-react";
-import React, { useState } from "react";
-import Appointment from "./appoitment/appoitment";
-import Appoint from "./appoint/appoint";
+import { SendIcon } from "lucide-react";
+import React from "react";
 
 const Meet = () => {
-  const [activeTab, setActiveTab] = useState("agenda");
-
-  const renderTabContent = () => {
-    switch (activeTab) {
-      case "agenda":
-        return <Appointment />;
-      case "rdv":
-        return <Appoint />;
-
-      case "formation":
-        return <div></div>;
-
-      default:
-        return null;
-    }
-  };
-
   return (
-    <div>
-      <div>
-        <ul className="flex gap-4  custom-640:text-[12px] custom-640:flex-wrap">
-          <li
-            className={`py-2 px-4 text-[13px] flex items-center gap-1 rounded-full cursor-pointer ${
-              activeTab === "agenda" ? "bg-green-600 text-white" : "bg-white"
-            }`}
-            onClick={() => setActiveTab("agenda")}>
-            <ContactIcon className="w-[1.2rem]" /> Agenda
-          </li>
-
-          <li
-            className={`py-2 px-4 text-[13px] flex items-center gap-1 rounded-full cursor-pointer ${
-              activeTab === "rdv" ? "bg-green-600 text-white" : "bg-white"
-            }`}
-            onClick={() => setActiveTab("rdv")}>
-            <InboxIcon className="w-[1.2rem]" /> Demander un rendez-vous
-          </li>
-        </ul>
+    <div className="relative">
+      <h1 className="text-[1.2rem] font-[800] mb-4 ">Chat</h1>
+      <div className="flex flex-col gap-8 pb-24">
+        <div className="flex items-center gap-4">
+          <div>
+            <div className="w-[3rem] h-[3rem] rounded-full overflow-hidden ">
+              <img
+                src="/assets/images/fakeFace.jpeg"
+                className="w-full h-full object-cover"
+                alt="fakeFace"
+              />
+            </div>
+          </div>
+          <span>
+            <p className="bg-[#eee] p-4 rounded-xl ">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis
+              sed ipsum beatae eaque veritatis, magni iste! Architecto a harum
+              perspiciatis, ad quam atque. Ad quia alias ipsum ea dolores in.
+            </p>
+            <small>Feb-10h42-2024</small>
+          </span>
+        </div>
+        <div className="flex items-center gap-4">
+          <span>
+            <p className="bg-[#eee] p-4 rounded-xl ">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis
+              sed ipsum beatae eaque veritatis, magni iste! Architecto a harum
+              perspiciatis, ad quam atque. Ad quia alias ipsum ea dolores in.
+            </p>
+            <small>Feb-10h42-2024</small>
+          </span>
+          <div>
+            <div className="w-[3rem] h-[3rem] rounded-full overflow-hidden ">
+              <img
+                src="/assets/icons/doctor.svg"
+                className="w-full h-full object-cover"
+                alt="fakeFace"
+              />
+            </div>
+          </div>
+        </div>
       </div>
-      <div>
-        <div className="mt-6">{renderTabContent()}</div>
+      <div className="w-full mt-10 absolute bottom-0 ">
+        <span className="border-[2px] p-2 rounded-2xl w-full flex items-center gap-3 ">
+          <input
+            type="text"
+            className="w-full p-2 outline-none"
+            name="search"
+            id="search"
+          />
+          <div className="w-[3rem] h-[3rem] bg-primary grid place-content-center rounded-2xl p-1 text-white ">
+            <SendIcon />
+          </div>
+        </span>
       </div>
     </div>
   );
